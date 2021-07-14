@@ -6,7 +6,7 @@ import {
   QuizDifficultyState,
   QuizNumbersState,
 } from 'src/state';
-import { DEFAULT_NUMBERS, QUIZ_PAGENAME } from 'src/constant';
+import { DEFAULT_NUMBERS, MULTIPLE_TYPE, QUIZ_PAGENAME } from 'src/constant';
 
 export type TQuiz = {
   category: string;
@@ -41,7 +41,7 @@ export default selector<TResponseData>({
       params: {
         amount,
         difficulty,
-        type: 'multiple',
+        type: MULTIPLE_TYPE,
       },
     });
     const decodedResponseData = {

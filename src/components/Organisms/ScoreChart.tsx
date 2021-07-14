@@ -1,7 +1,11 @@
 import { PieChart, Pie, Cell } from 'recharts';
 import { useRecoilValue } from 'recoil';
 
-import { CORRECT_COLOR, INCORRECT_COLOR } from 'src/constant';
+import {
+  CORRECT_ANSWER_NAME,
+  CORRECT_COLOR,
+  INCORRECT_COLOR,
+} from 'src/constant';
 import { QuizResultsState } from 'src/state';
 import { Content } from 'components/Molecules';
 import Atoms from 'components/Atoms';
@@ -10,22 +14,19 @@ const ScoreChart = () => {
   const quizResults = useRecoilValue(QuizResultsState);
   const correctQuizNumbers = quizResults.filter((quiz) => quiz.correct).length;
 
-  const correctAnswersName = 'Correct';
-  const incorrectAnswersName = 'Incorrect';
-
   const datas = [
     {
-      name: correctAnswersName,
+      name: CORRECT_ANSWER_NAME,
       value: correctQuizNumbers,
     },
     {
-      name: incorrectAnswersName,
+      name: 'In' + CORRECT_ANSWER_NAME,
       value: quizResults.length - correctQuizNumbers,
     },
   ];
 
   return (
-    <Content header="SCORES">
+    <Content header="Scores">
       <Atoms.Div display="flex">
         <Atoms.Div
           flex={2}
@@ -46,7 +47,7 @@ const ScoreChart = () => {
                 <Cell
                   key={`cell-${index}`}
                   fill={
-                    entry.name == correctAnswersName
+                    entry.name == CORRECT_ANSWER_NAME
                       ? CORRECT_COLOR
                       : INCORRECT_COLOR
                   }
@@ -62,13 +63,13 @@ const ScoreChart = () => {
               margin="8px 0px"
               fontSize="14px"
               color={
-                entry.name == correctAnswersName
+                entry.name == CORRECT_ANSWER_NAME
                   ? CORRECT_COLOR
                   : INCORRECT_COLOR
               }
             >
               {`${entry.name} : ${
-                entry.name == correctAnswersName
+                entry.name == CORRECT_ANSWER_NAME
                   ? correctQuizNumbers
                   : quizResults.length - correctQuizNumbers
               }`}
